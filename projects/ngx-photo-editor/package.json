@@ -1,19 +1,11 @@
 {
-  "name": "ngx-photo-editor",
+  "name": "seek-unique-photo-editor",
   "version": "0.3.8",
   "description": "An image cropper for Angular",
   "author": {
     "name": "Ahamed Bilal",
     "email": "bilalazmy0@gmail.com"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/AhamedBilal/ngx-photo-editor.git"
-  },
-  "bugs": {
-    "url": "https://github.com/AhamedBilal/ngx-photo-editor/issues"
-  },
-  "homepage": "https://github.com/AhamedBilal/ngx-photo-editor",
   "keywords": [
     "angular",
     "angular 6",

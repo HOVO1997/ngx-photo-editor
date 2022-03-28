@@ -1,28 +1,9 @@
 {
-  "name": "seek-unique-photo-editor",
-  "version": "0.3.8",
+  "name": "seek-unique-editor",
+  "version": "0.0.1",
   "description": "An image cropper for Angular",
-  "author": {
-    "name": "Ahamed Bilal",
-    "email": "bilalazmy0@gmail.com"
-  },
   "keywords": [
-    "angular",
-    "angular 6",
-    "angular 7",
-    "angular 8",
-    "angular 9",
-    "angular 10",
-    "angular 11",
-    "angular 12",
-    "cropper",
-    "cropperjs",
-    "ngx-cropper",
-    "angular cropper",
-    "angular photo editor",
-    "angular image cropper",
-    "image cropper",
-    "popup cropper"
+    "angular"
   ],
   "license": "MIT",
   "peerDependencies": {

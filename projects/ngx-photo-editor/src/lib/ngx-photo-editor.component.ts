@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import Cropper from 'cropperjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import ViewMode = Cropper.ViewMode;
+import {BgChangeComponent} from './bg-change/bg-change.component';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -17,8 +18,8 @@ export class NgxPhotoEditorComponent {
   public cropper: Cropper;
   public outputImage: string;
   prevZoom = 0;
-
-  @Input() modalTitle = 'Photo Editor';
+  ref: any;
+  @Input() modalTitle = 'Editor';
   @Input() hideModalHeader = false;
   @Input() aspectRatio = 1;
   @Input() autoCropArea = 1;
@@ -41,6 +42,9 @@ export class NgxPhotoEditorComponent {
   @Input() resizeToHeight: number;
   @Input() imageSmoothingEnabled = true;
   @Input() imageSmoothingQuality: ImageSmoothingQuality = 'high';
+  @Output() sendCroppedImage = new EventEmitter();
+  @Input() picsartApiKey: string;
+  @Input() picsartUrl: string;
   url: string;
   lastUpdate = Date.now();
 
@@ -182,7 +186,7 @@ export class NgxPhotoEditorComponent {
     this.cropper.reset();
   }
 
-  export() {
+  export(arg: string) {
     let cropedImage;
     if (this.resizeToWidth && this.resizeToHeight) {
       cropedImage = this.cropper.getCroppedCanvas({
@@ -216,10 +220,34 @@ export class NgxPhotoEditorComponent {
       });
     }, 'image/' + this.format, this.quality / 100);
     this.imageLoaded = false;
+    if (arg === 'changeBG') {
+      this.imageLoaded = true;
+      return this.outputImage;
+    }
   }
 
   open() {
-    this.modalService.open(this.content, {size: this.modalSize, centered: this.modalCentered, backdrop: 'static'});
+    this.ref = this.modalService.open(this.content, {size: this.modalSize, centered: this.modalCentered, backdrop: 'static'});
+  }
+
+  openModal() {
+    const image = this.export('changeBG');
+    const modalRef = this.modalService.open(BgChangeComponent);
+    modalRef.componentInstance.image = image;
+    modalRef.componentInstance.api = this.picsartApiKey;
+    modalRef.componentInstance.picsartUrl = this.picsartUrl;
+    modalRef.result.then((result) => {
+      if (result) {
+        this.sendCroppedImage.emit(result);
+        this.ref.close();
+      }
+    });
+    // modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+    //   console.log(receivedEntry);
+    // })
+    // modalRef.componentInstance.loader.subscribe((receivedEntry) => {
+    //  this.imageLoaded = !receivedEntry;
+    // });
   }
 }
 

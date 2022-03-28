@@ -356,5 +356,10 @@
 .cropper-disabled .cropper-point {
   cursor: not-allowed;
 }
-
-
+.loader {
+  position: absolute;
+  z-index: 9999;
+  background: #8F8F8F;
+  top: 0;
+  left: 0;
+}

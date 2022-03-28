@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Simple modal</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="mb-2">
+    <label for="background">Set background image or color</label>
+    <div class="d-flex justify-content-between">
+      <div class="col-6  text-center">
+        <div>
+          <label for="bg" class="mr-2">Set background</label>
+          <input type="radio" name="bg_color" id="bg"
+                 (click)="choose($event['target']['value'], 'background')">
+        </div>
+        <input [disabled]="type !== 'background'" type="file" class="form-control" id="background" (change)="onBackgroundUpload($event)">
+      </div>
+      <div class="col-6  text-center">
+        <div>
+          <label for="color" class="mr-2">Set color</label>
+          <input type="radio" name="bg_color" id="color"
+                 (click)="choose($event['target']['value'], 'color')">
+        </div>
+        <input [disabled]="type !== 'color'" type="color" class="form-control" (change)="onColorUpload($event)">
+      </div>
+    </div>
+  </div>
+  <button (click)="passBack()" [disabled]="called" type="submit" class="btn btn-primary w-100">Change</button>
+</div>

@@ -11,22 +11,20 @@ export class AppComponent {
   base64: any;
   imageChangedEvent: any;
   imageUrl: any;
-
+  api = 'tZcPbiBMqiCjoX0GKF8lb6TCRP3Y7TGx';
+  picsartUrl = 'https://api.picsart.io/tools/demo/removebg';
   fileChangeEvent(event: any) {
     this.imageChangedEvent = event;
   }
 
 
   imageCropped(event: CroppedEvent) {
-    console.log(event);
+    // console.log(event);
     this.base64 = event.base64;
   }
 
-  gotoGithub() {
-    window.open('https://github.com/AhamedBilal/ngx-photo-editor');
+  getImage(image): void {
+    this.base64 = image;
   }
 
-  // gotoNPM() {
-  //   window.open('https://www.npmjs.com/package/ngx-photo-editor');
-  // }
 }
